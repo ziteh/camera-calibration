@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace CameraCalibration
 {
     public class CameraCalibration
     {
-        public static PointF ImageToWorld(double[] imagePoint ,
+        public static PointF ImageToWorld(double[] imagePoint,
                                           double[,] intrinsicMatrix,
                                           double[,] rotationMatrix,
                                           double[] translationVector)
@@ -20,13 +21,16 @@ namespace CameraCalibration
             var rM = Matrix<double>.Build.DenseOfArray(rotationMatrix);
             var tV = Vector<double>.Build.DenseOfArray(translationVector);
 
-            rM =  rM.SubMatrix(0, 2, 0, 3);
-            var tForm = rM.InsertRow(3,tV).Multiply(iM);
+            iP = iP.InsertColumn(2, Vector<double>.Build.DenseOfArray(new double[] { 1 }));
+            rM = rM.SubMatrix(0, 2, 0, 3);
+            var tForm = rM.InsertRow(2, tV).Multiply(iM);
             var result = iP.Multiply(tForm.Inverse());
 
-            PointF worldPoint = default;
-            worldPoint.X = (float)(result[0, 0] / result[2, 0]);
-            worldPoint.Y = (float)(result[1, 0] / result[2, 0]);
+            var worldPoint = new PointF()
+            {
+                X = (float)(result[0, 0] / result[0, 2]),
+                Y = (float)(result[0, 1] / result[0, 2])
+            };
             return worldPoint;
         }
     }
