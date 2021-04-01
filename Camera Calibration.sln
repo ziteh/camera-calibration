@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraCalibration", "Camera Calibration\CameraCalibration.csproj", "{1AE263B5-D2CD-4F62-97DC-5BBE40C053D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraCalibration.TestConsole", "CameraCalibration.TestConsole\CameraCalibration.TestConsole.csproj", "{AAD4FDE8-9DED-46E5-8A88-A3AE42B23AC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1AE263B5-D2CD-4F62-97DC-5BBE40C053D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AE263B5-D2CD-4F62-97DC-5BBE40C053D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AE263B5-D2CD-4F62-97DC-5BBE40C053D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD4FDE8-9DED-46E5-8A88-A3AE42B23AC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD4FDE8-9DED-46E5-8A88-A3AE42B23AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD4FDE8-9DED-46E5-8A88-A3AE42B23AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD4FDE8-9DED-46E5-8A88-A3AE42B23AC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
