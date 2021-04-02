@@ -25,6 +25,26 @@ namespace CameraCalibration.UnitTests
             Assert.IsTrue(errorX < allowableError);
             Assert.IsTrue(errorY < allowableError);
         }
+        
+        [Test]
+        public void WorldToImage_InputRealData_OutputRealData()
+        {
+            // Arrange.
+            const int allowableError = 1;
+
+            // Act.
+            var actual = CameraCalibration.WorldToImage(_worldPoint,
+                                                        _intrinsicMatrix,
+                                                        _rotationMatrix,
+                                                        _translationVector);
+
+            // Assert.
+            var errorX = Math.Abs(actual[0] - _imagePoint[0]);
+            var errorY = Math.Abs(actual[1] - _imagePoint[1]);
+            
+            Assert.IsTrue(errorX < allowableError);
+            Assert.IsTrue(errorY < allowableError);
+        }
 
         private static double[,] _intrinsicMatrix =
         {
@@ -45,6 +65,6 @@ namespace CameraCalibration.UnitTests
 
         private static double[] _worldPoint = { 0, 125, 0 };
 
-        private static double[] _imagePoint = { 329.1558535, 521.2226187 };
+        private static double[] _imagePoint = { 327.555249063537, 521.172677636459 };
     }
 }
