@@ -26,13 +26,13 @@ namespace CameraCalibration
             var tForm = rM.InsertRow(2, tV).Multiply(iM);
             var result = iP.Multiply(tForm.Inverse());
 
-            return new double[] 
+            return new double[]
             {
                 (result[0, 0] / result[0, 2]),
                 (result[0, 1] / result[0, 2])
             };
         }
-        
+
         public static double[] WorldToImage(double[] worldPoint,
                                           double[,] intrinsicMatrix,
                                           double[,] rotationMatrix,
@@ -43,11 +43,11 @@ namespace CameraCalibration
             var rM = Matrix<double>.Build.DenseOfArray(rotationMatrix);
             var tV = Vector<double>.Build.DenseOfArray(translationVector);
 
-            wP = wP.InsertRow(3, Vector<double>.Build.DenseOfArray(new double[] { 1 }));
-            var extinsicMatrix = rM.InsertColumn(3, tV);
-            var result = iM.Multiply(extinsicMatrix.Multiply(wP));
+            wP = wP.InsertColumn(3, Vector<double>.Build.DenseOfArray(new double[] { 1 }));
+            var cM = rM.InsertRow(3, tV).Multiply(iM);
+            var result = wP.Multiply(cM);
 
-            return new double[] 
+            return new double[]
             {
                 (result[0, 0] / result[0, 2]),
                 (result[0, 1] / result[0, 2])
