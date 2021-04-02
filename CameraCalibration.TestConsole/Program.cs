@@ -36,7 +36,7 @@ namespace CameraCalibration.TestConsole
 
             var pixelPoint = new double[] { pixelX, pixelY };
             var worldPoint = CameraCalibration.ImageToWorld(pixelPoint, iM, rM, tV);
-            Console.WriteLine($"World: {worldPoint.X} , {worldPoint.Y}");
+            Console.WriteLine($"World: {worldPoint[0]} , {worldPoint[1]}");
 
             Console.WriteLine("\r\n\r\nPress Enter To Exit ...");
             Console.ReadLine();

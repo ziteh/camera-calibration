@@ -11,7 +11,7 @@ namespace CameraCalibration
 {
     public class CameraCalibration
     {
-        public static PointF ImageToWorld(double[] imagePoint,
+        public static double[] ImageToWorld(double[] imagePoint,
                                           double[,] intrinsicMatrix,
                                           double[,] rotationMatrix,
                                           double[] translationVector)
@@ -26,12 +26,11 @@ namespace CameraCalibration
             var tForm = rM.InsertRow(2, tV).Multiply(iM);
             var result = iP.Multiply(tForm.Inverse());
 
-            var worldPoint = new PointF()
+            return new double[] 
             {
-                X = (float)(result[0, 0] / result[0, 2]),
-                Y = (float)(result[0, 1] / result[0, 2])
+                (result[0, 0] / result[0, 2]),
+                (result[0, 1] / result[0, 2])
             };
-            return worldPoint;
         }
     }
 }
