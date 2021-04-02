@@ -32,5 +32,26 @@ namespace CameraCalibration
                 (result[0, 1] / result[0, 2])
             };
         }
+        
+        public static double[] WorldToImage(double[] worldPoint,
+                                          double[,] intrinsicMatrix,
+                                          double[,] rotationMatrix,
+                                          double[] translationVector)
+        {
+            var wP = Matrix<double>.Build.DenseOfRowArrays(worldPoint);
+            var iM = Matrix<double>.Build.DenseOfArray(intrinsicMatrix);
+            var rM = Matrix<double>.Build.DenseOfArray(rotationMatrix);
+            var tV = Vector<double>.Build.DenseOfArray(translationVector);
+
+            wP = wP.InsertRow(3, Vector<double>.Build.DenseOfArray(new double[] { 1 }));
+            var extinsicMatrix = rM.InsertColumn(3, tV);
+            var result = iM.Multiply(extinsicMatrix.Multiply(wP));
+
+            return new double[] 
+            {
+                (result[0, 0] / result[0, 2]),
+                (result[0, 1] / result[0, 2])
+            };
+        }
     }
 }
